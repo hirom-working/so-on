@@ -1,10 +1,13 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 :root {
   background-color: #F2D8B3;
   color: #2C2C2C;
+  --color-retro-bg: #F2D8B3;
+  --color-retro-accent1: #FBD266;
+  --color-retro-accent2: #8FB0A9;
+  --color-retro-accent3: #D76735;
+  --color-retro-black: #2C2C2C;
 }
 
 body {
