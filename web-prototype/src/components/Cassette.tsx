@@ -49,9 +49,10 @@ export const Cassette = ({ isPlaying }: CassetteProps) => {
                     {/* Handwritten Label - On white label area below stripes */}
                     <div className="absolute top-[6px] left-0 right-0 flex justify-center z-20">
                         <div
-                            className="font-handwriting text-[#1a1a1a] text-[11px] tracking-wide -rotate-[0.5deg]"
+                            className="text-[#1a1a1a] text-[14px] -rotate-[0.5deg]"
                             style={{
-                                fontWeight: 400
+                                fontFamily: "'Caveat', cursive",
+                                fontWeight: 500
                             }}
                         >
                             sentakuki_2025/12/31
