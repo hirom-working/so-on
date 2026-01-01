@@ -46,17 +46,16 @@ export const Cassette = ({ isPlaying }: CassetteProps) => {
                     {/* Stripe Gloss */}
                     <div className="absolute top-0 w-full h-8 bg-gradient-to-b from-white/20 to-transparent pointer-events-none" />
 
-                    {/* Side Letter (A-side) */}
-                    <div className="absolute top-2.5 left-2.5 text-2xl font-black text-retro-dark/25 font-sans drop-shadow-[0_0.5px_0_rgba(255,255,255,0.5)]">A</div>
-
-                    {/* Title */}
-                    <div className="mt-11 ml-5">
-                        <div className="flex items-center gap-2 mb-0.5">
-                            <div className="w-2 h-2 rounded-full bg-retro-primary shadow-[inset_0_1px_2px_rgba(0,0,0,0.3)]" />
-                            <div className="text-[9px] tracking-[0.2em] font-bold text-retro-dark/60 uppercase">High Fidelity</div>
-                        </div>
-                        <div className="font-handwriting text-retro-dark text-lg font-bold -rotate-1 opacity-90 drop-shadow-[0_0.5px_0_rgba(255,255,255,0.3)]">
-                            Lo-Fi Sleep
+                    {/* Handwritten Label - Center */}
+                    <div className="absolute inset-0 flex items-center justify-center">
+                        <div
+                            className="font-handwriting text-retro-dark/80 text-sm tracking-wide -rotate-[0.5deg]"
+                            style={{
+                                fontWeight: 300,
+                                textShadow: '0 0.5px 0 rgba(255,255,255,0.3)'
+                            }}
+                        >
+                            sentakuki_2025/12/31
                         </div>
                     </div>
 
