@@ -1,34 +1,49 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Cassette } from './components/Cassette'
+import { VUMeter } from './components/VUMeter'
+import { TimeDial } from './components/TimeDial'
+import { Controls } from './components/Controls'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [isPlaying, setIsPlaying] = useState(false)
+  const [duration, setDuration] = useState(30) // minutes
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="min-h-screen bg-retro-bg p-8 flex flex-col items-center justify-center font-sans text-retro-black select-none">
+      {/* Main Device Container */}
+      <div className="w-full max-w-md bg-retro-bg/50 rounded-[3rem] p-6 shadow-xl border border-white/20 aspect-[9/16] flex flex-col gap-6 relative overflow-hidden">
+
+        {/* Top Section: VU Meter & Dial */}
+        <div className="flex gap-4 h-32">
+          <div className="flex-1">
+            <VUMeter isPlaying={isPlaying} />
+          </div>
+          <div className="flex-1">
+            <TimeDial value={duration} onChange={setDuration} />
+          </div>
+        </div>
+
+        {/* Middle Section: Cassette */}
+        <div className="flex-1 flex items-center justify-center">
+          <Cassette isPlaying={isPlaying} />
+        </div>
+
+        {/* Bottom Section: Controls */}
+        <div className="h-24">
+          <Controls
+            isPlaying={isPlaying}
+            onPlay={() => setIsPlaying(true)}
+            onStop={() => setIsPlaying(false)}
+          />
+        </div>
+
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+
+      {/* Footer / Debug info */}
+      <div className="mt-8 text-retro-accent3 text-sm opacity-50">
+        So-On Prototype v0.1
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    </div>
   )
 }
 
