@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Cassette } from './components/Cassette'
 import { VUMeter } from './components/VUMeter'
 import { TimeDial } from './components/TimeDial'
@@ -7,6 +7,36 @@ import { Controls } from './components/Controls'
 function App() {
   const [isPlaying, setIsPlaying] = useState(false)
   const [duration, setDuration] = useState(30)
+  const audioRef = useRef<HTMLAudioElement | null>(null)
+
+  useEffect(() => {
+    const audio = new Audio('./audio.m4a')
+    audioRef.current = audio
+
+    audio.addEventListener('ended', () => {
+      setIsPlaying(false)
+    })
+
+    return () => {
+      audio.pause()
+      audio.src = ''
+    }
+  }, [])
+
+  const handlePlay = () => {
+    if (audioRef.current) {
+      audioRef.current.play()
+      setIsPlaying(true)
+    }
+  }
+
+  const handleStop = () => {
+    if (audioRef.current) {
+      audioRef.current.pause()
+      audioRef.current.currentTime = 0
+      setIsPlaying(false)
+    }
+  }
 
   return (
     <div className="min-h-screen bg-[#dcd5cd] p-4 flex flex-col items-center justify-center font-sans text-retro-dark select-none">
@@ -27,7 +57,7 @@ function App() {
               <div key={i} className="w-1 h-3 bg-retro-dark rounded-full" />
             ))}
           </div>
-          <div className="text-[10px] font-bold tracking-[0.3em]">SO-ON MODEL-1</div>
+          <div className="text-[10px] font-bold tracking-[0.3em]">and so on</div>
         </div>
 
         {/* Display / Meter Section */}
@@ -49,8 +79,8 @@ function App() {
         <div className="h-28 relative z-10">
           <Controls
             isPlaying={isPlaying}
-            onPlay={() => setIsPlaying(true)}
-            onStop={() => setIsPlaying(false)}
+            onPlay={handlePlay}
+            onStop={handleStop}
           />
         </div>
       </div>
