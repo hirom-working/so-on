@@ -5,6 +5,11 @@ interface SettingsModalProps {
   onClose: () => void
 }
 
+const credits = [
+  { name: 'Hiromu YAMASHITA', role: 'アプリ開発' },
+  { name: 'Shinya OHMI', role: '環境音制作' },
+]
+
 const libraries = [
   { name: 'React', license: 'MIT', url: 'https://react.dev' },
   { name: 'Vite', license: 'MIT', url: 'https://vitejs.dev' },
@@ -57,9 +62,25 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
             <p className="text-retro-dark font-mono">v3.0.0</p>
           </section>
 
-          {/* Credits/Licenses */}
+          {/* Credits */}
           <section>
-            <h3 className="text-xs font-bold text-retro-dark/50 uppercase tracking-wider mb-2">クレジット / ライセンス</h3>
+            <h3 className="text-xs font-bold text-retro-dark/50 uppercase tracking-wider mb-2">クレジット</h3>
+            <div className="space-y-1.5">
+              {credits.map((credit) => (
+                <div
+                  key={credit.name}
+                  className="flex items-center justify-between py-1.5 px-2"
+                >
+                  <span className="text-sm text-retro-dark">{credit.name}</span>
+                  <span className="text-xs text-retro-dark/40">{credit.role}</span>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* Libraries */}
+          <section>
+            <h3 className="text-xs font-bold text-retro-dark/50 uppercase tracking-wider mb-2">使用ライブラリ</h3>
             <div className="space-y-1.5">
               {libraries.map((lib) => (
                 <a
@@ -81,21 +102,12 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
             <h3 className="text-xs font-bold text-retro-dark/50 uppercase tracking-wider mb-2">法的情報</h3>
             <div className="space-y-1.5">
               <a
-                href="https://and-so-on.koyatsu.me/privacy"
+                href="/privacy.html"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-between py-2 px-2 rounded-lg hover:bg-retro-dark/5 transition-colors"
               >
                 <span className="text-sm text-retro-dark">プライバシーポリシー</span>
-                <ExternalLink size={14} className="text-retro-dark/40" />
-              </a>
-              <a
-                href="https://and-so-on.koyatsu.me/terms"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-between py-2 px-2 rounded-lg hover:bg-retro-dark/5 transition-colors"
-              >
-                <span className="text-sm text-retro-dark">利用規約</span>
                 <ExternalLink size={14} className="text-retro-dark/40" />
               </a>
             </div>
