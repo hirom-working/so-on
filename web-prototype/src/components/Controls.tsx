@@ -1,4 +1,6 @@
+import { useState } from 'react'
 import { Play, Square, Settings } from 'lucide-react'
+import { SettingsModal } from './SettingsModal'
 
 interface ControlsProps {
     isPlaying: boolean
@@ -7,6 +9,7 @@ interface ControlsProps {
 }
 
 export const Controls = ({ onPlay, onStop }: ControlsProps) => {
+    const [isSettingsOpen, setIsSettingsOpen] = useState(false)
     return (
         <div className="w-full h-full flex items-end justify-center gap-3 px-6 pb-4 bg-gradient-to-b from-[#d4cab8] to-[#c5bba8] rounded-b-[30px] shadow-[inset_0_2px_4px_rgba(0,0,0,0.1)] relative">
             {/* Surface texture */}
@@ -35,8 +38,14 @@ export const Controls = ({ onPlay, onStop }: ControlsProps) => {
             {/* Settings Button - Neutral */}
             <PianoKey
                 icon={<Settings size={16} />}
-                onClick={() => { }}
+                onClick={() => setIsSettingsOpen(true)}
                 variant="neutral"
+            />
+
+            {/* Settings Modal */}
+            <SettingsModal
+                isOpen={isSettingsOpen}
+                onClose={() => setIsSettingsOpen(false)}
             />
         </div>
     )
