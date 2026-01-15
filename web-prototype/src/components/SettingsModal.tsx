@@ -7,7 +7,7 @@ interface SettingsModalProps {
 
 const credits = [
   { name: 'Hiromu YAMASHITA', role: 'アプリ開発' },
-  { name: 'Shinya OHMI', role: '環境音制作' },
+  { name: 'Shinya OMI', role: '環境音制作' },
 ]
 
 const libraries = [

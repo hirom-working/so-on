@@ -32,21 +32,4 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 80
-  type: ClusterIP
-
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
-metadata:
-  name: and-so-on-ingressroute
-spec:
-  entryPoints:
-    - websecure
-  routes:
-  - match: Host(`and-so-on.koyatsu.me`)
-    kind: Rule
-    services:
-    - name: and-so-on-service
-      port: 80
-  tls:
-    certResolver: letsencrypt-prod
+  type: LoadBalancer
