@@ -65,7 +65,7 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                   className="flex flex-col py-1 px-2"
                 >
                   <span className="text-xs text-retro-dark/50">{credit.role}</span>
-                  <span className="text-sm text-retro-dark">{credit.name}</span>
+                  <span className="text-lg text-retro-dark" style={{ fontFamily: 'Caveat, cursive' }}>{credit.name}</span>
                 </div>
               ))}
             </div>
