@@ -10,13 +10,6 @@ const credits = [
   { name: 'Shinya OMI', role: '環境音制作' },
 ]
 
-const libraries = [
-  { name: 'React', license: 'MIT', url: 'https://react.dev' },
-  { name: 'Vite', license: 'MIT', url: 'https://vitejs.dev' },
-  { name: 'TailwindCSS', license: 'MIT', url: 'https://tailwindcss.com' },
-  { name: 'Lucide React', license: 'ISC', url: 'https://lucide.dev' },
-  { name: 'TypeScript', license: 'Apache-2.0', url: 'https://typescriptlang.org' },
-]
 
 export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
   if (!isOpen) return null
@@ -74,25 +67,6 @@ export function SettingsModal({ isOpen, onClose }: SettingsModalProps) {
                   <span className="text-sm text-retro-dark">{credit.name}</span>
                   <span className="text-xs text-retro-dark/40">{credit.role}</span>
                 </div>
-              ))}
-            </div>
-          </section>
-
-          {/* Libraries */}
-          <section>
-            <h3 className="text-xs font-bold text-retro-dark/50 uppercase tracking-wider mb-2">使用ライブラリ</h3>
-            <div className="space-y-0">
-              {libraries.map((lib) => (
-                <a
-                  key={lib.name}
-                  href={lib.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-between py-0.5 px-2 rounded-lg hover:bg-retro-dark/5 transition-colors group"
-                >
-                  <span className="text-sm text-retro-dark">{lib.name}</span>
-                  <span className="text-xs text-retro-dark/40 group-hover:text-retro-dark/60">{lib.license}</span>
-                </a>
               ))}
             </div>
           </section>

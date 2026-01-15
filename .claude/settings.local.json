@@ -18,7 +18,8 @@
       "Bash(env)",
       "mcp__ollama__ollama_list",
       "Bash(ssh yuri \"cd /tmp && rm -rf and_so_on && git clone https://github.com/hirom-working/and_so_on.git && cd and_so_on/web-prototype && docker build -t 192.168.150.161/library/and-so-on:latest . && docker push 192.168.150.161/library/and-so-on:latest\")",
-      "Bash(kubectl rollout:*)"
+      "Bash(kubectl rollout:*)",
+      "Bash(ssh:*)"
     ]
   }
 }
