@@ -6,7 +6,7 @@ interface SettingsModalProps {
 }
 
 const credits = [
-  { name: 'OMI Shinya', role: '環境音制作' },
+  { name: 'Shinya', role: '環境音制作' },
   { name: 'YAMASHITA Hiromu', role: 'アプリ開発' },
 ]
 
