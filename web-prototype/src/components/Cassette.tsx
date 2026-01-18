@@ -5,10 +5,11 @@ interface CassetteProps {
 
 export const Cassette = ({ isPlaying, progress = 0 }: CassetteProps) => {
     // Calculate tape amounts based on progress
-    // Left reel: full at start (progress=0), empty at end (progress=1)
-    // Right reel: empty at start (progress=0), full at end (progress=1)
-    const leftTapeRatio = 1 - progress
-    const rightTapeRatio = progress
+    // Tape flows from right reel to left reel during playback
+    // Right reel: full at start (progress=0), empty at end (progress=1)
+    // Left reel: empty at start (progress=0), full at end (progress=1)
+    const leftTapeRatio = progress
+    const rightTapeRatio = 1 - progress
     return (
         <div className="w-full aspect-[1.6/1] bg-[#1a1a1a] rounded-lg p-1.5 shadow-2xl relative overflow-hidden">
             {/* Outer Shell Bevel */}
