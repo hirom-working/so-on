@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">And So On</string>
+    <string name="title_activity_main">And So On</string>
+    <string name="package_name">me.koyatsu.andsoon</string>
+    <string name="custom_url_scheme">me.koyatsu.andsoon</string>
+</resources>
