@@ -88,15 +88,10 @@ export const Cassette = ({ isPlaying, progress = 0 }: CassetteProps) => {
                         <div className="absolute top-0 left-[20%] w-[30%] h-full bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-[-20deg]" />
                     </div>
 
-                    {/* Reel Left */}
+                    {/* Reel Top */}
                     <Reel isPlaying={isPlaying} tapeRatio={leftTapeRatio} />
 
-                    {/* Center Tape Path */}
-                    <div className="w-full h-2 relative z-0 flex items-center justify-center">
-                        <div className="absolute w-full h-[3px] bg-gradient-to-b from-[#4a3828] via-[#3d2b1f] to-[#2a1d15] shadow-sm" />
-                    </div>
-
-                    {/* Reel Right */}
+                    {/* Reel Bottom */}
                     <Reel isPlaying={isPlaying} tapeRatio={rightTapeRatio} />
                 </div>
             </div>
