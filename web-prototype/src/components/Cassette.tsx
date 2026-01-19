@@ -7,14 +7,28 @@ export const Cassette = ({ isPlaying, progress = 0 }: CassetteProps) => {
     // Calculate tape amounts based on progress
     const leftTapeRatio = progress
     const rightTapeRatio = 1 - progress
+
     return (
         <div className="w-full aspect-[1.6/1] bg-gradient-to-br from-[#9BA892] via-[#7F8C76] to-[#65705B] rounded-lg relative overflow-hidden shadow-2xl flex flex-col items-center">
+            {/* SVG Noise Filter Definition */}
+            <svg className="hidden">
+                <filter id="noiseFilter">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch" />
+                    <feColorMatrix type="saturate" values="0" />
+                    <feComponentTransfer>
+                        <feFuncR type="linear" slope="0.5" />
+                        <feFuncG type="linear" slope="0.5" />
+                        <feFuncB type="linear" slope="0.5" />
+                    </feComponentTransfer>
+                </filter>
+            </svg>
+
             {/* Subtle Lighting Highlights */}
             <div className="absolute inset-0 bg-gradient-to-br from-white/40 via-transparent to-black/10 pointer-events-none" />
             
-            {/* Casing Texture (Stronger Noise for Earthy Feel) */}
-            <div className="absolute inset-0 bg-plastic-texture opacity-40 pointer-events-none mix-blend-overlay" />
-            <div className="absolute inset-0 bg-plastic-texture opacity-20 pointer-events-none mix-blend-multiply" />
+            {/* Casing Texture (SVG Noise for Strong Earthy Feel) */}
+            <div className="absolute inset-0 opacity-40 pointer-events-none mix-blend-overlay" style={{ filter: 'url(#noiseFilter)' }} />
+            <div className="absolute inset-0 opacity-30 pointer-events-none mix-blend-multiply" style={{ filter: 'url(#noiseFilter)' }} />
 
             {/* Main Body Plastic - Depth details */}
             <div className="absolute inset-0 rounded-lg border border-white/30 pointer-events-none" />
@@ -37,7 +51,7 @@ export const Cassette = ({ isPlaying, progress = 0 }: CassetteProps) => {
             {/* Label Area (Paper Texture) */}
             <div className="w-[88%] h-[62%] mt-3.5 bg-[#FDFCF5] rounded-sm shadow-md relative overflow-hidden transform rotate-[0.2deg]">
                 {/* Paper Texture Overlay */}
-                <div className="absolute inset-0 bg-plastic-texture opacity-15 pointer-events-none" />
+                <div className="absolute inset-0 opacity-15 pointer-events-none" style={{ filter: 'url(#noiseFilter)' }} />
 
                 {/* Paper Edge Wear */}
                 <div className="absolute inset-0 border border-[#e0d8c8] rounded-sm pointer-events-none" />
@@ -90,8 +104,8 @@ export const Cassette = ({ isPlaying, progress = 0 }: CassetteProps) => {
             {/* Bottom Area (Magnetic Head Access) */}
             <div className="absolute bottom-0 w-[68%] h-[22%] bg-gradient-to-b from-[#7F8C76] to-[#65705B] clip-path-trapezoid flex items-center justify-center gap-10 shadow-[0_-2px_6px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.4)] border-t border-black/5">
                 {/* Surface texture */}
-                <div className="absolute inset-0 bg-plastic-texture opacity-30 pointer-events-none mix-blend-overlay" />
-                <div className="absolute inset-0 bg-plastic-texture opacity-10 pointer-events-none mix-blend-multiply" />
+                <div className="absolute inset-0 opacity-40 pointer-events-none mix-blend-overlay" style={{ filter: 'url(#noiseFilter)' }} />
+                <div className="absolute inset-0 opacity-20 pointer-events-none mix-blend-multiply" style={{ filter: 'url(#noiseFilter)' }} />
 
                 {/* Guide Holes */}
                 <GuideHole />
