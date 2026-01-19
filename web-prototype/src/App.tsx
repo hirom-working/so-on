@@ -447,23 +447,10 @@ function App() {
           </div>
 
           {/* Cassette Deck Section */}
-          <div className="flex-1 flex items-center justify-center bg-gradient-to-b from-[#e0d6c6] to-[#d0c6b6] rounded-xl shadow-[inset_0_2px_6px_rgba(0,0,0,0.1),0_1px_0_rgba(255,255,255,0.5)] border border-white/40 relative z-10 overflow-hidden">
+          <div className="flex-1 flex items-center justify-center p-3 bg-gradient-to-b from-[#e0d6c6] to-[#d0c6b6] rounded-xl shadow-[inset_0_2px_6px_rgba(0,0,0,0.1),0_1px_0_rgba(255,255,255,0.5)] border border-white/40 relative z-10">
+            {/* Deck surface texture */}
             <div className="absolute inset-0 bg-plastic-texture opacity-10 pointer-events-none rounded-xl" />
-            {/* Corner screws */}
-            <DeckScrew className="top-2 left-2" />
-            <DeckScrew className="top-2 right-2" />
-            <DeckScrew className="bottom-2 left-2" />
-            <DeckScrew className="bottom-2 right-2" />
-            {/* Cassette - rotated 90 degrees clockwise */}
-            <div
-              className="rotate-90"
-              style={{
-                width: '75%',
-                aspectRatio: '1.6/1'
-              }}
-            >
-              <Cassette isPlaying={isPlaying} progress={duration > 0 ? (duration - remainingTime) / duration : 0} />
-            </div>
+            <Cassette isPlaying={isPlaying} progress={duration > 0 ? (duration - remainingTime) / duration : 0} />
           </div>
 
           {/* Control Section */}
@@ -493,14 +480,5 @@ function App() {
     </div>
   )
 }
-
-// Deck corner screw component
-const DeckScrew = ({ className }: { className: string }) => (
-  <div className={`absolute w-3 h-3 rounded-full bg-gradient-to-br from-[#b8b0a0] via-[#a09890] to-[#888078] shadow-[0_1px_2px_rgba(0,0,0,0.3),inset_0_1px_1px_rgba(255,255,255,0.3)] flex items-center justify-center z-20 ${className}`}>
-    {/* Cross/X pattern */}
-    <div className="absolute w-[1px] h-2 bg-[#555] rotate-45 shadow-[0_0_1px_rgba(0,0,0,0.5)]" />
-    <div className="absolute w-[1px] h-2 bg-[#555] -rotate-45 shadow-[0_0_1px_rgba(0,0,0,0.5)]" />
-  </div>
-)
 
 export default App
