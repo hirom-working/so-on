@@ -13,12 +13,12 @@ export const Cassette = ({ isPlaying, progress = 0 }: CassetteProps) => {
             {/* SVG Noise Filter Definition */}
             <svg className="hidden">
                 <filter id="noiseFilter">
-                    <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch" />
+                    <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch" />
                     <feColorMatrix type="saturate" values="0" />
                     <feComponentTransfer>
-                        <feFuncR type="linear" slope="0.5" />
-                        <feFuncG type="linear" slope="0.5" />
-                        <feFuncB type="linear" slope="0.5" />
+                        <feFuncR type="linear" slope="1.2" />
+                        <feFuncG type="linear" slope="1.2" />
+                        <feFuncB type="linear" slope="1.2" />
                     </feComponentTransfer>
                 </filter>
             </svg>
@@ -27,8 +27,8 @@ export const Cassette = ({ isPlaying, progress = 0 }: CassetteProps) => {
             <div className="absolute inset-0 bg-gradient-to-br from-white/40 via-transparent to-black/10 pointer-events-none" />
             
             {/* Casing Texture (SVG Noise for Strong Earthy Feel) */}
-            <div className="absolute inset-0 opacity-40 pointer-events-none mix-blend-overlay" style={{ filter: 'url(#noiseFilter)' }} />
-            <div className="absolute inset-0 opacity-30 pointer-events-none mix-blend-multiply" style={{ filter: 'url(#noiseFilter)' }} />
+            <div className="absolute inset-0 opacity-60 pointer-events-none mix-blend-overlay" style={{ filter: 'url(#noiseFilter)' }} />
+            <div className="absolute inset-0 opacity-40 pointer-events-none mix-blend-multiply" style={{ filter: 'url(#noiseFilter)' }} />
 
             {/* Main Body Plastic - Depth details */}
             <div className="absolute inset-0 rounded-lg border border-white/30 pointer-events-none" />
@@ -104,8 +104,8 @@ export const Cassette = ({ isPlaying, progress = 0 }: CassetteProps) => {
             {/* Bottom Area (Magnetic Head Access) */}
             <div className="absolute bottom-0 w-[68%] h-[22%] bg-gradient-to-b from-[#7F8C76] to-[#65705B] clip-path-trapezoid flex items-center justify-center gap-10 shadow-[0_-2px_6px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.4)] border-t border-black/5">
                 {/* Surface texture */}
-                <div className="absolute inset-0 opacity-40 pointer-events-none mix-blend-overlay" style={{ filter: 'url(#noiseFilter)' }} />
-                <div className="absolute inset-0 opacity-20 pointer-events-none mix-blend-multiply" style={{ filter: 'url(#noiseFilter)' }} />
+                <div className="absolute inset-0 opacity-60 pointer-events-none mix-blend-overlay" style={{ filter: 'url(#noiseFilter)' }} />
+                <div className="absolute inset-0 opacity-30 pointer-events-none mix-blend-multiply" style={{ filter: 'url(#noiseFilter)' }} />
 
                 {/* Guide Holes */}
                 <GuideHole />
