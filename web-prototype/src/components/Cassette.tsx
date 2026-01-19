@@ -133,7 +133,7 @@ const GuideHole = () => (
 
 const Reel = ({ isPlaying, tapeRatio }: { isPlaying: boolean, tapeRatio: number }) => {
     const minSize = 24
-    const maxSize = 56
+    const maxSize = 72
     const tapeSize = minSize + (maxSize - minSize) * tapeRatio
 
     return (
