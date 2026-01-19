@@ -9,7 +9,6 @@
       "Bash(gh run list:*)",
       "Bash(gh api:*)",
       "Bash(git commit:*)",
-      "mcp__playwright__browser_console_messages",
       "Bash(agent-browser snapshot:*)",
       "mcp__ollama__ollama_chat",
       "mcp__ollama__ollama_generate",
@@ -19,7 +18,11 @@
       "mcp__ollama__ollama_list",
       "Bash(ssh yuri \"cd /tmp && rm -rf and_so_on && git clone https://github.com/hirom-working/and_so_on.git && cd and_so_on/web-prototype && docker build -t 192.168.150.161/library/and-so-on:latest . && docker push 192.168.150.161/library/and-so-on:latest\")",
       "Bash(kubectl rollout:*)",
-      "Bash(ssh:*)"
+      "Bash(ssh:*)",
+      "Bash(wrangler:*)",
+      "Bash(echo $CLOUDFLARE_API_TOKEN)",
+      "Bash(ffmpeg:*)",
+      "Bash(gh run watch:*)"
     ]
   }
 }

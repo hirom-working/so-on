@@ -62,7 +62,7 @@ export const Cassette = ({ isPlaying, progress = 0 }: CassetteProps) => {
                                 fontWeight: 500
                             }}
                         >
-                            sentakuki_2025/12/31
+                            sentakuki 2026/01/04
                         </div>
                     </div>
 
