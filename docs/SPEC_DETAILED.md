@@ -378,10 +378,10 @@ and so on
 ### 13.1 概要
 - **目的**: UI/UXのデザイン検証およびPoC（Proof of Concept）
 - **技術スタック**: React 19 + Vite + Tailwind CSS 4 + TypeScript
-- **デプロイ先**: GitHub Pages
+- **ビルドサーバ**: yuri (192.168.150.123)
 
 ### 13.2 公開URL
-- **PoC**: https://hirom-working.github.io/and_so_on/
+- **Production**: https://and-so-on.koyatsu.me/
 
 ### 13.3 ディレクトリ構成
 ```

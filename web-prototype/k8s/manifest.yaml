@@ -17,6 +17,7 @@ spec:
       containers:
       - name: and-so-on
         image: 192.168.150.161/library/and-so-on:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 80
 
