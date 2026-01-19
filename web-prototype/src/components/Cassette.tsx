@@ -49,7 +49,7 @@ export const Cassette = ({ isPlaying, progress = 0 }: CassetteProps) => {
             <Screw className="bottom-2.5 right-2.5" />
 
             {/* Label Area (Paper Texture) */}
-            <div className="w-[88%] h-[62%] mt-3.5 bg-[#FDFCF5] rounded-sm shadow-md relative overflow-hidden transform rotate-[0.2deg]">
+            <div className="w-[88%] h-[62%] mt-3.5 bg-[#FDFCF5] rounded-sm shadow-md relative overflow-hidden transform rotate-[0.2deg] z-20">
                 {/* Paper Texture Overlay */}
                 <div className="absolute inset-0 opacity-15 pointer-events-none" style={{ filter: 'url(#noiseFilter)' }} />
 
@@ -78,7 +78,7 @@ export const Cassette = ({ isPlaying, progress = 0 }: CassetteProps) => {
                 </div>
 
                 {/* Window Cutout */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[38%] w-[74%] h-[44%] bg-[#1a1a1a] rounded-xl shadow-[inset_0_2px_8px_rgba(0,0,0,0.8),inset_0_-1px_2px_rgba(255,255,255,0.1)] flex items-center justify-center gap-5 px-3 border border-[#333]">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[38%] w-[74%] h-[44%] bg-[#1a1a1a] rounded-xl shadow-[inset_0_2px_8px_rgba(0,0,0,0.8),inset_0_-1px_2px_rgba(255,255,255,0.1)] flex items-center justify-center gap-5 px-3 border border-[#333] z-0">
                     {/* Window Depth Layer */}
                     <div className="absolute inset-[2px] rounded-[10px] bg-gradient-to-b from-[#252525] to-[#1a1a1a] pointer-events-none" />
 
