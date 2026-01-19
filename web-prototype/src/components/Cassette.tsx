@@ -138,8 +138,9 @@ const Reel = ({ isPlaying, tapeRatio }: { isPlaying: boolean, tapeRatio: number 
 
     return (
         <div className={`relative z-10 w-11 h-11 flex items-center justify-center ${isPlaying ? 'animate-spin-slow' : ''}`}>
+            {/* Outer shadow ring */}
             <div
-                className="absolute rounded-full bg-black/30 blur-[2px] translate-y-[1px]"
+                className="absolute rounded-full bg-black/30 blur-[2px]"
                 style={{ width: tapeSize, height: tapeSize }}
             />
             <div
