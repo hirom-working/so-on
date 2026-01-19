@@ -458,7 +458,7 @@ function App() {
           </div>
 
           {/* Control Section */}
-          <div className="h-28 relative z-10">
+          <div className="h-24 relative z-10">
             <Controls
               isPlaying={isPlaying}
               onPlay={handlePlay}

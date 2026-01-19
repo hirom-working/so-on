@@ -16,28 +16,28 @@ export const Controls = ({ onPlay, onStop }: ControlsProps) => {
             <div className="absolute inset-0 bg-plastic-texture opacity-15 pointer-events-none rounded-b-[30px]" />
 
             {/* Button Well/Depression */}
-            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 w-[85%] h-[70px] bg-gradient-to-b from-[#2a2520] to-[#1a1510] rounded-lg shadow-[inset_0_2px_8px_rgba(0,0,0,0.6),0_1px_0_rgba(255,255,255,0.2)] pointer-events-none">
+            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 w-[85%] h-[56px] bg-gradient-to-b from-[#2a2520] to-[#1a1510] rounded-lg shadow-[inset_0_2px_8px_rgba(0,0,0,0.6),0_1px_0_rgba(255,255,255,0.2)] pointer-events-none">
                 {/* Inner well highlight */}
                 <div className="absolute inset-[1px] rounded-lg bg-gradient-to-b from-[#3a3530] to-transparent opacity-50" />
             </div>
 
             {/* Play Button - Accent Color */}
             <PianoKey
-                icon={<Play size={18} fill="currentColor" />}
+                icon={<Play size={16} fill="currentColor" />}
                 onClick={onPlay}
                 variant="primary"
             />
 
             {/* Stop Button - Neutral */}
             <PianoKey
-                icon={<Square size={16} fill="currentColor" />}
+                icon={<Square size={14} fill="currentColor" />}
                 onClick={onStop}
                 variant="neutral"
             />
 
             {/* Settings Button - Neutral */}
             <PianoKey
-                icon={<Settings size={16} />}
+                icon={<Settings size={14} />}
                 onClick={() => setIsSettingsOpen(true)}
                 variant="neutral"
             />
@@ -65,7 +65,7 @@ const PianoKey = ({ icon, onClick, variant }: PianoKeyProps) => {
             <button
                 onClick={onClick}
                 className={`
-                    group relative w-[72px] h-[58px] rounded-t-[3px] rounded-b-[6px]
+                    group relative w-[58px] h-[46px] rounded-t-[3px] rounded-b-[6px]
                     flex flex-col items-center justify-center
                     transition-all duration-75 ease-out
                     origin-top
