@@ -5,110 +5,81 @@ interface CassetteProps {
 
 export const Cassette = ({ isPlaying, progress = 0 }: CassetteProps) => {
     // Calculate tape amounts based on progress
-    // Tape flows from right reel to left reel during playback
-    // Right reel: full at start (progress=0), empty at end (progress=1)
-    // Left reel: empty at start (progress=0), full at end (progress=1)
-    const leftTapeRatio = progress
-    const rightTapeRatio = 1 - progress
+    // When rotated 90deg clockwise:
+    // - Top reel (originally left) starts empty, fills up
+    // - Bottom reel (originally right) starts full, empties
+    const topTapeRatio = progress
+    const bottomTapeRatio = 1 - progress
+
     return (
-        <div className="w-full aspect-[1.6/1] bg-gradient-to-br from-[#EDE5D5] via-[#E3DAC9] to-[#D8CFBF] rounded-lg shadow-xl relative overflow-hidden flex flex-col items-center">
-                {/* Subtle Gradient for lighting on plastic */}
-                <div className="absolute inset-0 bg-gradient-to-br from-white/50 via-transparent to-black/15 pointer-events-none" />
+        <div className="w-full h-full bg-gradient-to-br from-[#F5F0E6] via-[#EDE5D5] to-[#E3DAC9] rounded-lg shadow-xl relative overflow-hidden flex">
+            {/* Subtle Gradient for lighting on plastic */}
+            <div className="absolute inset-0 bg-gradient-to-br from-white/40 via-transparent to-black/10 pointer-events-none" />
 
-                {/* Edge Highlight (Left/Top) */}
-                <div className="absolute top-0 left-0 right-0 h-[1px] bg-white/60" />
-                <div className="absolute top-0 left-0 bottom-0 w-[1px] bg-white/40" />
+            {/* Edge Highlight */}
+            <div className="absolute top-0 left-0 right-0 h-[1px] bg-white/60" />
+            <div className="absolute top-0 left-0 bottom-0 w-[1px] bg-white/40" />
+            <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-black/15" />
+            <div className="absolute top-0 right-0 bottom-0 w-[1px] bg-black/10" />
 
-                {/* Edge Shadow (Right/Bottom) */}
-                <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-black/20" />
-                <div className="absolute top-0 right-0 bottom-0 w-[1px] bg-black/15" />
+            {/* Left Section - Magnetic Head Access (trapezoid area) */}
+            <div className="w-[22%] h-full bg-gradient-to-r from-[#d8d0c0] to-[#e0d8c8] flex flex-col items-center justify-center gap-6 relative">
+                {/* Surface texture */}
+                <div className="absolute inset-0 bg-plastic-texture opacity-10 pointer-events-none" />
 
-                {/* Screw Holes (Realistic) */}
-                <Screw className="top-2 left-2" />
-                <Screw className="top-2 right-2" />
-                <Screw className="bottom-2 left-2" />
-                <Screw className="bottom-2 right-2" />
+                {/* Guide Holes */}
+                <GuideHole />
+                <div className="w-3 h-6 bg-[#2a2a2a] rounded-sm shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)]" />
+                <GuideHole />
+            </div>
 
-                {/* Label Area (Paper Texture) */}
-                <div className="w-[88%] h-[62%] mt-3 bg-[#FDFCF5] rounded-sm shadow-md relative overflow-hidden transform rotate-[0.3deg] skew-y-[0.1deg]">
-                    {/* Paper Texture Overlay */}
-                    <div className="absolute inset-0 bg-plastic-texture opacity-15 pointer-events-none" />
+            {/* Center Section - Window with Reels */}
+            <div className="flex-1 flex flex-col items-center justify-center py-3 relative">
+                {/* Window Cutout */}
+                <div className="w-[70%] h-[85%] bg-[#1a1a1a] rounded-xl shadow-[inset_0_2px_8px_rgba(0,0,0,0.8)] flex flex-col items-center justify-between py-4 relative">
+                    {/* Window Depth Layer */}
+                    <div className="absolute inset-[2px] rounded-[10px] bg-gradient-to-b from-[#252525] to-[#1a1a1a] pointer-events-none" />
 
-                    {/* Paper Edge Wear */}
-                    <div className="absolute inset-0 border border-[#e0d8c8] rounded-sm pointer-events-none" />
-                    <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-b from-black/5 to-transparent" />
-
-                    {/* Aesthetic Stripes - Retro Colors */}
-                    <div className="absolute top-0 w-full h-8 bg-retro-primary/90 mix-blend-multiply" />
-                    <div className="absolute top-8 w-full h-2 bg-retro-secondary/80 mix-blend-multiply" />
-
-                    {/* Stripe Gloss */}
-                    <div className="absolute top-0 w-full h-8 bg-gradient-to-b from-white/20 to-transparent pointer-events-none" />
-
-                    {/* Handwritten Label - On white label area below stripes */}
-                    <div className="absolute top-[6px] left-0 right-0 flex justify-center z-20">
-                        <div
-                            className="text-[#1a1a1a] text-[21px] -rotate-[0.5deg]"
-                            style={{
-                                fontFamily: "'Caveat', cursive",
-                                fontWeight: 500
-                            }}
-                        >
-                            sentakuki 2026/01/04
-                        </div>
+                    {/* Window Glass Effect */}
+                    <div className="absolute inset-0 rounded-xl overflow-hidden pointer-events-none">
+                        <div className="absolute inset-0 bg-gradient-to-br from-white/5 via-transparent to-transparent" />
                     </div>
 
-                    {/* Window Cutout - wider horizontally */}
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[38%] w-[94%] h-[57%] bg-[#1a1a1a] rounded-xl shadow-[inset_0_2px_8px_rgba(0,0,0,0.8),inset_0_-1px_2px_rgba(255,255,255,0.1)] flex items-center justify-center px-1 border border-[#333]">
-                        {/* Window Depth Layer */}
-                        <div className="absolute inset-[2px] rounded-[10px] bg-gradient-to-b from-[#252525] to-[#1a1a1a] pointer-events-none" />
+                    {/* Top Reel */}
+                    <Reel isPlaying={isPlaying} tapeRatio={topTapeRatio} />
 
-                        {/* Window Glass Effect */}
-                        <div className="absolute inset-0 rounded-xl overflow-hidden pointer-events-none">
-                            <div className="absolute inset-0 bg-gradient-to-br from-white/8 via-transparent to-transparent" />
-                            <div className="absolute top-0 left-[20%] w-[30%] h-full bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-[-20deg]" />
-                        </div>
-
-                        {/* Reel Left */}
-                        <Reel isPlaying={isPlaying} tapeRatio={leftTapeRatio} />
-
-                        {/* Center Tape Path - fixed width to keep reels close */}
-                        <div className="w-[147px] h-10 relative z-0 flex items-center justify-center shrink-0">
-                        </div>
-
-                        {/* Reel Right */}
-                        <Reel isPlaying={isPlaying} tapeRatio={rightTapeRatio} />
-                    </div>
+                    {/* Bottom Reel */}
+                    <Reel isPlaying={isPlaying} tapeRatio={bottomTapeRatio} />
                 </div>
+            </div>
 
-                {/* Bottom Trapezoid Area (Magnetic Head Access) */}
-                <div className="absolute bottom-0 w-[68%] h-[22%] bg-gradient-to-b from-[#d4c9b9] to-[#c5baaa] clip-path-trapezoid flex items-center justify-center gap-10 shadow-[0_-2px_6px_rgba(0,0,0,0.15),inset_0_1px_0_rgba(255,255,255,0.4)]">
-                    {/* Surface texture */}
-                    <div className="absolute inset-0 bg-plastic-texture opacity-10 pointer-events-none" />
+            {/* Right Section - Label Area */}
+            <div className="w-[35%] h-full bg-[#FDFCF8] flex items-center justify-center relative">
+                {/* Paper Texture */}
+                <div className="absolute inset-0 bg-plastic-texture opacity-10 pointer-events-none" />
 
-                    {/* Guide Holes with depth */}
-                    <GuideHole />
-                    <div className="w-8 h-3 bg-[#2a2a2a] rounded-sm shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)]" />
-                    <GuideHole />
+                {/* Label border */}
+                <div className="absolute inset-1 border border-[#e8e0d0] rounded-sm pointer-events-none" />
+
+                {/* Handwritten Label - vertical text */}
+                <div
+                    className="text-[#1a1a1a] text-[18px] writing-mode-vertical"
+                    style={{
+                        fontFamily: "'Caveat', cursive",
+                        fontWeight: 500,
+                        writingMode: 'vertical-rl',
+                        textOrientation: 'mixed'
+                    }}
+                >
+                    sentakuki 2026/01/04
                 </div>
-
+            </div>
         </div>
     )
 }
 
-const Screw = ({ className }: { className: string }) => (
-    <div className={`absolute w-3 h-3 rounded-full bg-gradient-to-br from-[#a8a8a8] via-[#888] to-[#666] shadow-[0_1px_2px_rgba(0,0,0,0.4),inset_0_1px_1px_rgba(255,255,255,0.4)] flex items-center justify-center ${className}`}>
-        {/* Screw head depression */}
-        <div className="w-2 h-2 rounded-full bg-gradient-to-br from-[#777] to-[#999] shadow-[inset_0_1px_2px_rgba(0,0,0,0.4)] flex items-center justify-center">
-            {/* Phillips head cross */}
-            <div className="absolute w-[1px] h-1.5 bg-[#444] rotate-45 shadow-[0_0_1px_rgba(0,0,0,0.5)]" />
-            <div className="absolute w-[1px] h-1.5 bg-[#444] -rotate-45 shadow-[0_0_1px_rgba(0,0,0,0.5)]" />
-        </div>
-    </div>
-)
-
 const GuideHole = () => (
-    <div className="w-3.5 h-3.5 rounded-full bg-[#1a1a1a] shadow-[inset_0_2px_4px_rgba(0,0,0,0.8),0_0.5px_0_rgba(255,255,255,0.3)] relative">
+    <div className="w-4 h-4 rounded-full bg-[#1a1a1a] shadow-[inset_0_2px_4px_rgba(0,0,0,0.8),0_0.5px_0_rgba(255,255,255,0.3)] relative">
         {/* Hole depth ring */}
         <div className="absolute inset-[2px] rounded-full bg-[#0a0a0a]" />
     </div>
@@ -116,15 +87,13 @@ const GuideHole = () => (
 
 const Reel = ({ isPlaying, tapeRatio }: { isPlaying: boolean, tapeRatio: number }) => {
     // tapeRatio: 0 (empty) to 1 (full)
-    // Size ranges from 28px (empty hub) to 76px (full tape) - 200% larger max tape
-    const hubSize = 24 // Fixed hub size (larger)
+    const hubSize = 24
     const minTapeSize = 28
-    const maxTapeSize = 76
+    const maxTapeSize = 70
     const tapeSize = minTapeSize + (maxTapeSize - minTapeSize) * tapeRatio
 
-    // Calculate number of visible tape layers based on tapeRatio
-    // More tape = more visible winding layers
-    const maxLayers = 12
+    // Calculate number of visible tape layers
+    const maxLayers = 10
     const visibleLayers = Math.floor(tapeRatio * maxLayers)
 
     // Generate tape layer rings
@@ -133,10 +102,9 @@ const Reel = ({ isPlaying, tapeRatio }: { isPlaying: boolean, tapeRatio: number 
         const layerStep = (tapeSize - hubSize - 4) / maxLayers
         for (let i = 0; i < visibleLayers; i++) {
             const ringSize = hubSize + 4 + (i + 1) * layerStep
-            // Alternate slightly different browns to simulate wound tape
             const hue = 25 + (i % 3) * 2
             const saturation = 35 + (i % 2) * 10
-            const lightness = 18 + (i % 4) * 2
+            const lightness = 20 + (i % 4) * 2
             tapeRings.push(
                 <div
                     key={i}
@@ -155,15 +123,14 @@ const Reel = ({ isPlaying, tapeRatio }: { isPlaying: boolean, tapeRatio: number 
     }
 
     return (
-        // Fixed size container - smaller to bring reels close
-        <div className={`relative z-10 w-8 h-8 flex items-center justify-center ${isPlaying ? 'animate-spin-slow' : ''}`}>
-            {/* Outer shadow ring */}
+        <div className={`relative z-10 w-16 h-16 flex items-center justify-center ${isPlaying ? 'animate-spin-slow' : ''}`}>
+            {/* Outer shadow */}
             <div
                 className="absolute rounded-full bg-black/30 blur-[2px] translate-y-[1px]"
                 style={{ width: tapeSize + 2, height: tapeSize + 2 }}
             />
 
-            {/* Base tape color (outermost visible when there's tape) */}
+            {/* Base tape color */}
             {tapeRatio > 0 && (
                 <div
                     className="absolute rounded-full bg-gradient-to-br from-[#3d2b1f] to-[#2a1d15] border border-[#1a1008]"
@@ -171,9 +138,9 @@ const Reel = ({ isPlaying, tapeRatio }: { isPlaying: boolean, tapeRatio: number 
                 />
             )}
 
-            {/* Tape winding layers - concentric rings from outside to inside */}
+            {/* Tape winding layers */}
             <div className="absolute flex items-center justify-center" style={{ width: tapeSize, height: tapeSize }}>
-                {tapeRings.reverse()}
+                {[...tapeRings].reverse()}
             </div>
 
             {/* Tape shine effect */}
@@ -184,17 +151,17 @@ const Reel = ({ isPlaying, tapeRatio }: { isPlaying: boolean, tapeRatio: number 
                 />
             )}
 
-            {/* Reel Hub (Metallic) - Always centered, 20% larger */}
-            <div className="absolute w-6 h-6 rounded-full bg-gradient-to-br from-[#f0f0f0] via-[#d0d0d0] to-[#a0a0a0] shadow-[0_1px_3px_rgba(0,0,0,0.4),inset_0_1px_2px_rgba(255,255,255,0.8)]">
+            {/* Reel Hub (Metallic) */}
+            <div className="absolute w-7 h-7 rounded-full bg-gradient-to-br from-[#f0f0f0] via-[#d0d0d0] to-[#a0a0a0] shadow-[0_1px_3px_rgba(0,0,0,0.4),inset_0_1px_2px_rgba(255,255,255,0.8)]">
                 {/* Hub center dimple */}
-                <div className="absolute inset-[7px] rounded-full bg-gradient-to-br from-[#888] to-[#bbb] shadow-[inset_0_1px_2px_rgba(0,0,0,0.4)]" />
+                <div className="absolute inset-[8px] rounded-full bg-gradient-to-br from-[#888] to-[#bbb] shadow-[inset_0_1px_2px_rgba(0,0,0,0.4)]" />
 
                 {/* Spokes (Teeth) */}
                 {[0, 60, 120, 180, 240, 300].map(deg => (
                     <div
                         key={deg}
-                        className="absolute top-1/2 left-1/2 w-[3px] h-[11px] bg-gradient-to-b from-[#e8e8e8] to-[#c0c0c0] origin-center rounded-t-sm shadow-[0_0_1px_rgba(0,0,0,0.3)]"
-                        style={{ transform: `translate(-50%, -50%) rotate(${deg}deg) translateY(-7px)` }}
+                        className="absolute top-1/2 left-1/2 w-[3px] h-[12px] bg-gradient-to-b from-[#e8e8e8] to-[#c0c0c0] origin-center rounded-t-sm shadow-[0_0_1px_rgba(0,0,0,0.3)]"
+                        style={{ transform: `translate(-50%, -50%) rotate(${deg}deg) translateY(-8px)` }}
                     />
                 ))}
             </div>
