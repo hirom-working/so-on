@@ -3,7 +3,7 @@ interface CassetteProps {
     progress?: number // 0 (start) to 1 (end)
 }
 
-export const Cassette = (/*{ isPlaying, progress = 0 }: CassetteProps*/) => {
+export const Cassette = ({ isPlaying, progress = 0 }: CassetteProps) => {
     // Calculate tape amounts based on progress
     // Tape flows from right reel to left reel during playback
     // Right reel: full at start (progress=0), empty at end (progress=1)
