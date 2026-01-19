@@ -454,8 +454,8 @@ function App() {
             <DeckScrew className="top-2 right-2" />
             <DeckScrew className="bottom-2 left-2" />
             <DeckScrew className="bottom-2 right-2" />
-            {/* Rotated cassette - centered, 90 degrees clockwise */}
-            <div className="h-[55%] aspect-[1.6/1] rotate-90 flex items-center justify-center">
+            {/* Rotated cassette - 90 degrees clockwise, fills most of the deck */}
+            <div className="w-[85%] h-[90%] rotate-90 origin-center" style={{ aspectRatio: '1.6/1' }}>
               <Cassette isPlaying={isPlaying} progress={duration > 0 ? (duration - remainingTime) / duration : 0} />
             </div>
           </div>
