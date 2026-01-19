@@ -94,9 +94,7 @@ export const Cassette = ({ isPlaying, progress = 0 }: CassetteProps) => {
                 <Reel isPlaying={isPlaying} tapeRatio={leftTapeRatio} />
 
                 {/* Center Tape Path (Spacer) - Width controls the axis distance */}
-                <div className="w-[34px] h-2 relative z-0 flex items-center justify-center">
-                    <div className="absolute w-full h-[3px] bg-gradient-to-b from-[#4a3828] via-[#3d2b1f] to-[#2a1d15] shadow-sm" />
-                </div>
+                <div className="w-[34px] h-2 relative z-0 flex items-center justify-center" />
 
                 {/* Reel Right */}
                 <Reel isPlaying={isPlaying} tapeRatio={rightTapeRatio} />
