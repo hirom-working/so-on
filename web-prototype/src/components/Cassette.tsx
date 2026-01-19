@@ -48,8 +48,31 @@ export const Cassette = ({ isPlaying, progress = 0 }: CassetteProps) => {
             <Screw className="bottom-2.5 left-2.5" />
             <Screw className="bottom-2.5 right-2.5" />
 
-            {/* Label Area (Paper Texture) */}
-            <div className="w-[88%] h-[62%] mt-3.5 bg-[#FDFCF5] rounded-sm shadow-md relative overflow-hidden transform rotate-[0.2deg] z-20">
+            {/* Window Area - Deeply recessed (Behind the label) */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[38%] w-[65%] h-[27%] bg-[#1a1a1a] rounded-xl shadow-[inset_0_2px_8px_rgba(0,0,0,0.8),inset_0_-1px_2px_rgba(255,255,255,0.1)] flex items-center justify-center gap-5 px-3 border border-[#333] z-0">
+                {/* Window Depth Layer */}
+                <div className="absolute inset-[2px] rounded-[10px] bg-gradient-to-b from-[#252525] to-[#1a1a1a] pointer-events-none" />
+
+                {/* Window Glass Effect */}
+                <div className="absolute inset-0 rounded-xl overflow-hidden pointer-events-none">
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/8 via-transparent to-transparent" />
+                    <div className="absolute top-0 left-[20%] w-[30%] h-full bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-[-20deg]" />
+                </div>
+
+                {/* Reel Left */}
+                <Reel isPlaying={isPlaying} tapeRatio={leftTapeRatio} />
+
+                {/* Center Tape Path (Spacer) */}
+                <div className="w-[34px] h-2 relative z-0 flex items-center justify-center">
+                    <div className="absolute w-full h-[3px] bg-gradient-to-b from-[#4a3828] via-[#3d2b1f] to-[#2a1d15] shadow-sm" />
+                </div>
+
+                {/* Reel Right */}
+                <Reel isPlaying={isPlaying} tapeRatio={rightTapeRatio} />
+            </div>
+
+            {/* Label Area (Paper Texture) - Over window area */}
+            <div className="w-[88%] h-[62%] mt-3.5 bg-[#FDFCF5] rounded-sm shadow-md relative overflow-hidden transform rotate-[0.2deg] z-20 pointer-events-none">
                 {/* Paper Texture Overlay */}
                 <div className="absolute inset-0 opacity-15 pointer-events-none" style={{ filter: 'url(#noiseFilter)' }} />
 
@@ -77,28 +100,8 @@ export const Cassette = ({ isPlaying, progress = 0 }: CassetteProps) => {
                     </div>
                 </div>
 
-                {/* Window Cutout */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[38%] w-[74%] h-[44%] bg-[#1a1a1a] rounded-xl shadow-[inset_0_2px_8px_rgba(0,0,0,0.8),inset_0_-1px_2px_rgba(255,255,255,0.1)] flex items-center justify-center gap-5 px-3 border border-[#333] z-0">
-                    {/* Window Depth Layer */}
-                    <div className="absolute inset-[2px] rounded-[10px] bg-gradient-to-b from-[#252525] to-[#1a1a1a] pointer-events-none" />
-
-                    {/* Window Glass Effect */}
-                    <div className="absolute inset-0 rounded-xl overflow-hidden pointer-events-none">
-                        <div className="absolute inset-0 bg-gradient-to-br from-white/8 via-transparent to-transparent" />
-                        <div className="absolute top-0 left-[20%] w-[30%] h-full bg-gradient-to-r from-transparent via-white/5 to-transparent skew-x-[-20deg]" />
-                    </div>
-
-                    {/* Reel Top */}
-                    <Reel isPlaying={isPlaying} tapeRatio={leftTapeRatio} />
-
-                    {/* Center Tape Path (Spacer) - Width controls the axis distance */}
-                    <div className="w-[34px] h-2 relative z-0 flex items-center justify-center">
-                        <div className="absolute w-full h-[3px] bg-gradient-to-b from-[#4a3828] via-[#3d2b1f] to-[#2a1d15] shadow-sm" />
-                    </div>
-
-                    {/* Reel Bottom */}
-                    <Reel isPlaying={isPlaying} tapeRatio={rightTapeRatio} />
-                </div>
+                {/* Window Cutout in the Label - Using transparent area to see the window beneath */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[38%] w-[74%] h-[44%] bg-transparent rounded-xl shadow-[inset_0_2px_8px_rgba(0,0,0,0.4)] border border-[#e0d8c8] z-30" />
             </div>
 
             {/* Bottom Area (Magnetic Head Access) */}
@@ -117,7 +120,7 @@ export const Cassette = ({ isPlaying, progress = 0 }: CassetteProps) => {
 }
 
 const Screw = ({ className }: { className: string }) => (
-    <div className={`absolute w-3 h-3 rounded-full bg-gradient-to-br from-[#8F9C86] via-[#7A8771] to-[#5F6956] shadow-[0_1px_2px_rgba(0,0,0,0.2),inset_0_1px_1px_rgba(255,255,255,0.5)] flex items-center justify-center ${className}`}>
+    <div className={`absolute w-3 h-3 rounded-full bg-gradient-to-br from-[#8F9C86] via-[#7A8771] to-[#5F6956] shadow-[0_1px_2px_rgba(0,0,0,0.2),inset_0_1px_1px_rgba(255,255,255,0.5)] flex items-center justify-center z-30 ${className}`}>
         <div className="w-2 h-2 rounded-full bg-gradient-to-br from-[#7A8771] to-[#8F9C86] shadow-[inset_0_1px_2px_rgba(0,0,0,0.2)] flex items-center justify-center">
             <div className="absolute w-[1px] h-1.5 bg-[#3A4A40] rotate-45 shadow-[0_0_1px_rgba(0,0,0,0.3)]" />
             <div className="absolute w-[1px] h-1.5 bg-[#3A4A40] -rotate-45 shadow-[0_0_1px_rgba(0,0,0,0.3)]" />
