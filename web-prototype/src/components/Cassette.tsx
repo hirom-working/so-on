@@ -4,8 +4,12 @@ interface CassetteProps {
 }
 
 export const Cassette = ({ isPlaying, progress = 0 }: CassetteProps) => {
-    // ... (rest of the component)
-
+    // Calculate tape amounts based on progress
+    // Tape flows from right reel to left reel during playback
+    // Right reel: full at start (progress=0), empty at end (progress=1)
+    // Left reel: empty at start (progress=0), full at end (progress=1)
+    // const leftTapeRatio = progress
+    // const rightTapeRatio = 1 - progress
     return (
         <div className="w-full h-full bg-[#1a1a1a] rounded-lg p-1.5 shadow-2xl relative overflow-hidden">
             {/* ... (casing texture) */}
@@ -47,7 +51,7 @@ export const Cassette = ({ isPlaying, progress = 0 }: CassetteProps) => {
             </div>
         </div>
     );
-}
+};
 
 // const Screw = ({ className }: { className: string }) => (
 //     <div className={`absolute w-3 h-3 rounded-full bg-gradient-to-br from-[#a8a8a8] via-[#888] to-[#666] shadow-[0_1px_2px_rgba(0,0,0,0.4),inset_0_1px_1px_rgba(255,255,255,0.4)] flex items-center justify-center ${className}`}>
