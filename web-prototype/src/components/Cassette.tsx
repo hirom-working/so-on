@@ -78,7 +78,7 @@ export const Cassette = ({ isPlaying, progress = 0 }: CassetteProps) => {
                 </div>
 
                 {/* Window Cutout */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[38%] w-[74%] h-[44%] bg-[#1a1a1a] rounded-xl shadow-[inset_0_2px_8px_rgba(0,0,0,0.8),inset_0_-1px_2px_rgba(255,255,255,0.1)] flex items-center justify-center gap-4 px-3 border border-[#333]">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[38%] w-[74%] h-[44%] bg-[#1a1a1a] rounded-xl shadow-[inset_0_2px_8px_rgba(0,0,0,0.8),inset_0_-1px_2px_rgba(255,255,255,0.1)] flex items-center justify-center gap-5 px-3 border border-[#333]">
                     {/* Window Depth Layer */}
                     <div className="absolute inset-[2px] rounded-[10px] bg-gradient-to-b from-[#252525] to-[#1a1a1a] pointer-events-none" />
 
@@ -92,7 +92,7 @@ export const Cassette = ({ isPlaying, progress = 0 }: CassetteProps) => {
                     <Reel isPlaying={isPlaying} tapeRatio={leftTapeRatio} />
 
                     {/* Center Tape Path (Spacer) - Width controls the axis distance */}
-                    <div className="w-8 h-2 relative z-0 flex items-center justify-center">
+                    <div className="w-[34px] h-2 relative z-0 flex items-center justify-center">
                         <div className="absolute w-full h-[3px] bg-gradient-to-b from-[#4a3828] via-[#3d2b1f] to-[#2a1d15] shadow-sm" />
                     </div>
 
