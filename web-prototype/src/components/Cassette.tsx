@@ -1,4 +1,7 @@
-
+interface CassetteProps {
+    isPlaying: boolean
+    progress?: number // 0 (start) to 1 (end)
+}
 
 export const Cassette = (/*{ isPlaying, progress = 0 }: CassetteProps*/) => {
     // Calculate tape amounts based on progress
