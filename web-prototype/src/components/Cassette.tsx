@@ -11,15 +11,7 @@ export const Cassette = ({ isPlaying, progress = 0 }: CassetteProps) => {
     const leftTapeRatio = progress
     const rightTapeRatio = 1 - progress
     return (
-        <div className="w-full aspect-[1.6/1] bg-[#1a1a1a] rounded-lg p-1.5 shadow-2xl relative overflow-hidden">
-            {/* Outer Shell Bevel */}
-            <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-[#3a3a3a] via-[#222] to-[#111] pointer-events-none" />
-
-            {/* Casing Texture (Subtle Noise) */}
-            <div className="absolute inset-0 bg-plastic-texture opacity-30 pointer-events-none mix-blend-overlay" />
-
-            {/* Main Body Plastic */}
-            <div className="w-full h-full bg-gradient-to-br from-[#EDE5D5] via-[#E3DAC9] to-[#D8CFBF] rounded-[4px] relative overflow-hidden flex flex-col items-center shadow-inner">
+        <div className="w-full aspect-[1.6/1] bg-gradient-to-br from-[#EDE5D5] via-[#E3DAC9] to-[#D8CFBF] rounded-lg shadow-xl relative overflow-hidden flex flex-col items-center">
                 {/* Subtle Gradient for lighting on plastic */}
                 <div className="absolute inset-0 bg-gradient-to-br from-white/50 via-transparent to-black/15 pointer-events-none" />
 
@@ -56,7 +48,7 @@ export const Cassette = ({ isPlaying, progress = 0 }: CassetteProps) => {
                     {/* Handwritten Label - On white label area below stripes */}
                     <div className="absolute top-[6px] left-0 right-0 flex justify-center z-20">
                         <div
-                            className="text-[#1a1a1a] text-[14px] -rotate-[0.5deg]"
+                            className="text-[#1a1a1a] text-[21px] -rotate-[0.5deg]"
                             style={{
                                 fontFamily: "'Caveat', cursive",
                                 fontWeight: 500
@@ -66,8 +58,8 @@ export const Cassette = ({ isPlaying, progress = 0 }: CassetteProps) => {
                         </div>
                     </div>
 
-                    {/* Window Cutout - The most complex part */}
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[38%] w-[74%] h-[44%] bg-[#1a1a1a] rounded-xl shadow-[inset_0_2px_8px_rgba(0,0,0,0.8),inset_0_-1px_2px_rgba(255,255,255,0.1)] flex items-center justify-center gap-6 px-3 border border-[#333]">
+                    {/* Window Cutout - wider horizontally */}
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[38%] w-[94%] h-[57%] bg-[#1a1a1a] rounded-xl shadow-[inset_0_2px_8px_rgba(0,0,0,0.8),inset_0_-1px_2px_rgba(255,255,255,0.1)] flex items-center justify-center px-1 border border-[#333]">
                         {/* Window Depth Layer */}
                         <div className="absolute inset-[2px] rounded-[10px] bg-gradient-to-b from-[#252525] to-[#1a1a1a] pointer-events-none" />
 
@@ -80,12 +72,8 @@ export const Cassette = ({ isPlaying, progress = 0 }: CassetteProps) => {
                         {/* Reel Left */}
                         <Reel isPlaying={isPlaying} tapeRatio={leftTapeRatio} />
 
-                        {/* Center Tape Path */}
-                        <div className="w-full h-10 relative z-0 flex items-center justify-center">
-                            {/* Tape running between reels */}
-                            <div className="absolute w-full h-[3px] bg-gradient-to-b from-[#4a3828] via-[#3d2b1f] to-[#2a1d15] shadow-sm" />
-                            {/* Tape shine */}
-                            <div className="absolute w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent top-0" />
+                        {/* Center Tape Path - fixed width to keep reels close */}
+                        <div className="w-[147px] h-10 relative z-0 flex items-center justify-center shrink-0">
                         </div>
 
                         {/* Reel Right */}
@@ -104,7 +92,6 @@ export const Cassette = ({ isPlaying, progress = 0 }: CassetteProps) => {
                     <GuideHole />
                 </div>
 
-            </div>
         </div>
     )
 }
@@ -129,10 +116,10 @@ const GuideHole = () => (
 
 const Reel = ({ isPlaying, tapeRatio }: { isPlaying: boolean, tapeRatio: number }) => {
     // tapeRatio: 0 (empty) to 1 (full)
-    // Size ranges from 24px (empty hub) to 56px (full tape)
-    const hubSize = 20 // Fixed hub size
-    const minTapeSize = 24
-    const maxTapeSize = 56
+    // Size ranges from 28px (empty hub) to 76px (full tape) - 200% larger max tape
+    const hubSize = 24 // Fixed hub size (larger)
+    const minTapeSize = 28
+    const maxTapeSize = 76
     const tapeSize = minTapeSize + (maxTapeSize - minTapeSize) * tapeRatio
 
     // Calculate number of visible tape layers based on tapeRatio
@@ -168,8 +155,8 @@ const Reel = ({ isPlaying, tapeRatio }: { isPlaying: boolean, tapeRatio: number 
     }
 
     return (
-        // Fixed size container to keep rotation axis stable
-        <div className={`relative z-10 w-14 h-14 flex items-center justify-center ${isPlaying ? 'animate-spin-slow' : ''}`}>
+        // Fixed size container - smaller to bring reels close
+        <div className={`relative z-10 w-8 h-8 flex items-center justify-center ${isPlaying ? 'animate-spin-slow' : ''}`}>
             {/* Outer shadow ring */}
             <div
                 className="absolute rounded-full bg-black/30 blur-[2px] translate-y-[1px]"
@@ -197,17 +184,17 @@ const Reel = ({ isPlaying, tapeRatio }: { isPlaying: boolean, tapeRatio: number 
                 />
             )}
 
-            {/* Reel Hub (Metallic) - Always centered */}
-            <div className="absolute w-5 h-5 rounded-full bg-gradient-to-br from-[#f0f0f0] via-[#d0d0d0] to-[#a0a0a0] shadow-[0_1px_3px_rgba(0,0,0,0.4),inset_0_1px_2px_rgba(255,255,255,0.8)]">
+            {/* Reel Hub (Metallic) - Always centered, 20% larger */}
+            <div className="absolute w-6 h-6 rounded-full bg-gradient-to-br from-[#f0f0f0] via-[#d0d0d0] to-[#a0a0a0] shadow-[0_1px_3px_rgba(0,0,0,0.4),inset_0_1px_2px_rgba(255,255,255,0.8)]">
                 {/* Hub center dimple */}
-                <div className="absolute inset-[6px] rounded-full bg-gradient-to-br from-[#888] to-[#bbb] shadow-[inset_0_1px_2px_rgba(0,0,0,0.4)]" />
+                <div className="absolute inset-[7px] rounded-full bg-gradient-to-br from-[#888] to-[#bbb] shadow-[inset_0_1px_2px_rgba(0,0,0,0.4)]" />
 
                 {/* Spokes (Teeth) */}
                 {[0, 60, 120, 180, 240, 300].map(deg => (
                     <div
                         key={deg}
-                        className="absolute top-1/2 left-1/2 w-[3px] h-[9px] bg-gradient-to-b from-[#e8e8e8] to-[#c0c0c0] origin-center rounded-t-sm shadow-[0_0_1px_rgba(0,0,0,0.3)]"
-                        style={{ transform: `translate(-50%, -50%) rotate(${deg}deg) translateY(-6px)` }}
+                        className="absolute top-1/2 left-1/2 w-[3px] h-[11px] bg-gradient-to-b from-[#e8e8e8] to-[#c0c0c0] origin-center rounded-t-sm shadow-[0_0_1px_rgba(0,0,0,0.3)]"
+                        style={{ transform: `translate(-50%, -50%) rotate(${deg}deg) translateY(-7px)` }}
                     />
                 ))}
             </div>
