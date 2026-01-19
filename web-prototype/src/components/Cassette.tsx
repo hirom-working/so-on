@@ -71,37 +71,56 @@ export const Cassette = ({ isPlaying, progress = 0 }: CassetteProps) => {
                 <Reel isPlaying={isPlaying} tapeRatio={rightTapeRatio} />
             </div>
 
-            {/* Label Area (Paper Texture) - Over window area */}
-            <div className="w-[88%] h-[62%] mt-3.5 bg-[#FDFCF5] rounded-sm shadow-md relative overflow-hidden transform rotate-[0.2deg] z-20 pointer-events-none">
-                {/* Paper Texture Overlay */}
-                <div className="absolute inset-0 opacity-15 pointer-events-none" style={{ filter: 'url(#noiseFilter)' }} />
+            {/* Label Area (Paper Texture) - Over window area with transparent cutout */}
+            <div className="w-[88%] h-[62%] mt-3.5 rounded-sm shadow-md relative overflow-hidden transform rotate-[0.2deg] z-20 pointer-events-none">
+                {/* We compose the label from 4 parts to create a transparent window in the center */}
+                
+                {/* Common styles for label parts */}
+                <style dangerouslySetInnerHTML={{__html: `
+                    .label-part {
+                        position: absolute;
+                        background-color: #FDFCF5;
+                        overflow: hidden;
+                    }
+                    .label-part::before {
+                        content: "";
+                        position: absolute;
+                        inset: 0;
+                        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='1.2'/%3E%3CfeFuncG type='linear' slope='1.2'/%3E%3CfeFuncB type='linear' slope='1.2'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.15'/%3E%3C/svg%3E");
+                        pointer-events: none;
+                    }
+                `}} />
 
-                {/* Paper Edge Wear */}
-                <div className="absolute inset-0 border border-[#e0d8c8] rounded-sm pointer-events-none" />
-                <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-b from-black/5 to-transparent" />
-
-                {/* Aesthetic Stripes - Retro Colors */}
-                <div className="absolute top-0 w-full h-8 bg-retro-primary/90 mix-blend-multiply" />
-                <div className="absolute top-8 w-full h-2 bg-retro-secondary/80 mix-blend-multiply" />
-
-                {/* Stripe Gloss */}
-                <div className="absolute top-0 w-full h-8 bg-gradient-to-b from-white/20 to-transparent pointer-events-none" />
-
-                {/* Handwritten Label */}
-                <div className="absolute top-[6px] left-0 right-0 flex justify-center z-20">
-                    <div
-                        className="text-[#1a1a1a] text-[14px] -rotate-[0.5deg]"
-                        style={{
-                            fontFamily: "'Caveat', cursive",
-                            fontWeight: 500
-                        }}
-                    >
-                        sentakuki 2026/01/04
+                {/* Top Part */}
+                <div className="label-part top-0 left-0 right-0 h-[28%] border-b border-[#e0d8c8]">
+                    {/* Aesthetic Stripes - Top */}
+                    <div className="absolute top-0 w-full h-8 bg-retro-primary/90 mix-blend-multiply" />
+                    <div className="absolute top-8 w-full h-2 bg-retro-secondary/80 mix-blend-multiply" />
+                    {/* Handwritten Label */}
+                    <div className="absolute top-[6px] left-0 right-0 flex justify-center z-20">
+                        <div
+                            className="text-[#1a1a1a] text-[14px] -rotate-[0.5deg]"
+                            style={{ fontFamily: "'Caveat', cursive", fontWeight: 500 }}
+                        >
+                            sentakuki 2026/01/04
+                        </div>
                     </div>
                 </div>
 
-                {/* Window Cutout in the Label - Using transparent area to see the window beneath */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[38%] w-[74%] h-[44%] bg-transparent rounded-xl shadow-[inset_0_2px_8px_rgba(0,0,0,0.4)] border border-[#e0d8c8] z-30" />
+                {/* Bottom Part */}
+                <div className="label-part bottom-0 left-0 right-0 h-[28%] border-t border-[#e0d8c8]" />
+
+                {/* Left Part */}
+                <div className="label-part top-[28%] bottom-[28%] left-0 w-[13%] border-r border-[#e0d8c8]" />
+
+                {/* Right Part */}
+                <div className="label-part top-[28%] bottom-[28%] right-0 w-[13%] border-l border-[#e0d8c8]" />
+
+                {/* Outer Border for the whole label */}
+                <div className="absolute inset-0 border border-[#e0d8c8] rounded-sm pointer-events-none" />
+                
+                {/* Inner Window Shadow (simulating the paper edge thickness) */}
+                <div className="absolute top-[28%] bottom-[28%] left-[13%] right-[13%] rounded-xl shadow-[inset_0_1px_2px_rgba(0,0,0,0.1)] pointer-events-none" />
             </div>
 
             {/* Bottom Area (Magnetic Head Access) */}
