@@ -452,7 +452,7 @@ function App() {
             <div className="absolute inset-0 bg-plastic-texture opacity-10 pointer-events-none rounded-xl" />
             
             {/* Rotated Cassette Container */}
-            <div className="w-[500px] h-[312px] flex items-center justify-center transform rotate-90 scale-[1.05]">
+            <div className="w-[525px] h-[328px] flex items-center justify-center transform rotate-90 scale-[1.1]">
               <Cassette isPlaying={isPlaying} progress={duration > 0 ? (duration - remainingTime) / duration : 0} />
             </div>
           </div>
