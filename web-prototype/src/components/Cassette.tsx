@@ -129,36 +129,73 @@ const GuideHole = () => (
 
 const Reel = ({ isPlaying, tapeRatio }: { isPlaying: boolean, tapeRatio: number }) => {
     // tapeRatio: 0 (empty) to 1 (full)
-    // Size ranges from 28px (empty) to 44px (full)
-    const minSize = 28
-    const maxSize = 44
-    const tapeSize = minSize + (maxSize - minSize) * tapeRatio
+    // Size ranges from 24px (empty hub) to 56px (full tape)
+    const hubSize = 20 // Fixed hub size
+    const minTapeSize = 24
+    const maxTapeSize = 56
+    const tapeSize = minTapeSize + (maxTapeSize - minTapeSize) * tapeRatio
+
+    // Calculate number of visible tape layers based on tapeRatio
+    // More tape = more visible winding layers
+    const maxLayers = 12
+    const visibleLayers = Math.floor(tapeRatio * maxLayers)
+
+    // Generate tape layer rings
+    const tapeRings = []
+    if (visibleLayers > 0) {
+        const layerStep = (tapeSize - hubSize - 4) / maxLayers
+        for (let i = 0; i < visibleLayers; i++) {
+            const ringSize = hubSize + 4 + (i + 1) * layerStep
+            // Alternate slightly different browns to simulate wound tape
+            const hue = 25 + (i % 3) * 2
+            const saturation = 35 + (i % 2) * 10
+            const lightness = 18 + (i % 4) * 2
+            tapeRings.push(
+                <div
+                    key={i}
+                    className="absolute rounded-full"
+                    style={{
+                        width: ringSize,
+                        height: ringSize,
+                        background: `hsl(${hue}, ${saturation}%, ${lightness}%)`,
+                        boxShadow: i === visibleLayers - 1
+                            ? 'inset 0 1px 2px rgba(255,255,255,0.1), inset 0 -1px 2px rgba(0,0,0,0.3)'
+                            : 'none'
+                    }}
+                />
+            )
+        }
+    }
 
     return (
         // Fixed size container to keep rotation axis stable
-        <div className={`relative z-10 w-11 h-11 flex items-center justify-center ${isPlaying ? 'animate-spin-slow' : ''}`}>
+        <div className={`relative z-10 w-14 h-14 flex items-center justify-center ${isPlaying ? 'animate-spin-slow' : ''}`}>
             {/* Outer shadow ring */}
             <div
                 className="absolute rounded-full bg-black/30 blur-[2px] translate-y-[1px]"
-                style={{ width: tapeSize, height: tapeSize }}
+                style={{ width: tapeSize + 2, height: tapeSize + 2 }}
             />
 
-            {/* Tape Roll (Dark Brown Magnetic Tape) */}
-            <div
-                className="absolute rounded-full bg-gradient-to-br from-[#4a3828] via-[#3d2b1f] to-[#2a1d15] shadow-lg flex items-center justify-center transition-all duration-300 border border-[#1a1008]"
-                style={{ width: tapeSize - 4, height: tapeSize - 4 }}
-            >
-                {/* Tape shine effect */}
-                <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-transparent via-white/10 to-transparent pointer-events-none" />
+            {/* Base tape color (outermost visible when there's tape) */}
+            {tapeRatio > 0 && (
+                <div
+                    className="absolute rounded-full bg-gradient-to-br from-[#3d2b1f] to-[#2a1d15] border border-[#1a1008]"
+                    style={{ width: tapeSize, height: tapeSize }}
+                />
+            )}
 
-                {/* Tape rings (depth effect) - only show if there's enough tape */}
-                {tapeRatio > 0.3 && (
-                    <div className="absolute inset-[3px] rounded-full border border-[#2a1d15]/50" />
-                )}
-                {tapeRatio > 0.5 && (
-                    <div className="absolute inset-[6px] rounded-full border border-[#2a1d15]/30" />
-                )}
+            {/* Tape winding layers - concentric rings from outside to inside */}
+            <div className="absolute flex items-center justify-center" style={{ width: tapeSize, height: tapeSize }}>
+                {tapeRings.reverse()}
             </div>
+
+            {/* Tape shine effect */}
+            {tapeRatio > 0 && (
+                <div
+                    className="absolute rounded-full bg-gradient-to-tr from-transparent via-white/8 to-transparent pointer-events-none"
+                    style={{ width: tapeSize - 2, height: tapeSize - 2 }}
+                />
+            )}
 
             {/* Reel Hub (Metallic) - Always centered */}
             <div className="absolute w-5 h-5 rounded-full bg-gradient-to-br from-[#f0f0f0] via-[#d0d0d0] to-[#a0a0a0] shadow-[0_1px_3px_rgba(0,0,0,0.4),inset_0_1px_2px_rgba(255,255,255,0.8)]">
