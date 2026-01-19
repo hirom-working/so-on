@@ -8,7 +8,7 @@ export const Cassette = ({ isPlaying, progress = 0 }: CassetteProps) => {
     const leftTapeRatio = progress
     const rightTapeRatio = 1 - progress
     return (
-        <div className="w-full aspect-[1.6/1] bg-gradient-to-br from-[#CAD6C8] via-[#B4C4B0] to-[#9CAFA0] rounded-lg relative overflow-hidden shadow-2xl flex flex-col items-center">
+        <div className="w-full aspect-[1.6/1] bg-gradient-to-br from-[#9BA892] via-[#7F8C76] to-[#65705B] rounded-lg relative overflow-hidden shadow-2xl flex flex-col items-center">
             {/* Subtle Lighting Highlights */}
             <div className="absolute inset-0 bg-gradient-to-br from-white/40 via-transparent to-black/10 pointer-events-none" />
             
@@ -87,7 +87,7 @@ export const Cassette = ({ isPlaying, progress = 0 }: CassetteProps) => {
             </div>
 
             {/* Bottom Area (Magnetic Head Access) */}
-            <div className="absolute bottom-0 w-[68%] h-[22%] bg-gradient-to-b from-[#B4C4B0] to-[#9CAFA0] clip-path-trapezoid flex items-center justify-center gap-10 shadow-[0_-2px_6px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.4)] border-t border-black/5">
+            <div className="absolute bottom-0 w-[68%] h-[22%] bg-gradient-to-b from-[#7F8C76] to-[#65705B] clip-path-trapezoid flex items-center justify-center gap-10 shadow-[0_-2px_6px_rgba(0,0,0,0.1),inset_0_1px_0_rgba(255,255,255,0.4)] border-t border-black/5">
                 {/* Surface texture */}
                 <div className="absolute inset-0 bg-plastic-texture opacity-10 pointer-events-none" />
 
@@ -101,10 +101,10 @@ export const Cassette = ({ isPlaying, progress = 0 }: CassetteProps) => {
 }
 
 const Screw = ({ className }: { className: string }) => (
-    <div className={`absolute w-3 h-3 rounded-full bg-gradient-to-br from-[#BCCEC0] via-[#A8B8AC] to-[#8A9A8E] shadow-[0_1px_2px_rgba(0,0,0,0.2),inset_0_1px_1px_rgba(255,255,255,0.5)] flex items-center justify-center ${className}`}>
-        <div className="w-2 h-2 rounded-full bg-gradient-to-br from-[#A8B8AC] to-[#BCCEC0] shadow-[inset_0_1px_2px_rgba(0,0,0,0.2)] flex items-center justify-center">
-            <div className="absolute w-[1px] h-1.5 bg-[#5A6A60] rotate-45 shadow-[0_0_1px_rgba(0,0,0,0.3)]" />
-            <div className="absolute w-[1px] h-1.5 bg-[#5A6A60] -rotate-45 shadow-[0_0_1px_rgba(0,0,0,0.3)]" />
+    <div className={`absolute w-3 h-3 rounded-full bg-gradient-to-br from-[#8F9C86] via-[#7A8771] to-[#5F6956] shadow-[0_1px_2px_rgba(0,0,0,0.2),inset_0_1px_1px_rgba(255,255,255,0.5)] flex items-center justify-center ${className}`}>
+        <div className="w-2 h-2 rounded-full bg-gradient-to-br from-[#7A8771] to-[#8F9C86] shadow-[inset_0_1px_2px_rgba(0,0,0,0.2)] flex items-center justify-center">
+            <div className="absolute w-[1px] h-1.5 bg-[#3A4A40] rotate-45 shadow-[0_0_1px_rgba(0,0,0,0.3)]" />
+            <div className="absolute w-[1px] h-1.5 bg-[#3A4A40] -rotate-45 shadow-[0_0_1px_rgba(0,0,0,0.3)]" />
         </div>
     </div>
 )
